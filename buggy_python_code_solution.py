@@ -1,8 +1,8 @@
 import sys 
 import os
+import urllib3
 import yaml
 import flask
-import urllib
 
 app = flask.Flask(__name__)
 
@@ -30,7 +30,7 @@ def fetch_website(urllib_version, url):
     # Fetch and print the requested URL
  
     try: 
-        http = urllib.PoolManager()
+        http = urllib3.PoolManager()
         r = http.request('GET', url)
     except:
         print('Exception')
@@ -40,7 +40,7 @@ def load_yaml(filename):
     stream = open(filename)
     deserialized_data = yaml.load(stream, Loader=yaml.Loader) #deserializing data
     return deserialized_data
-    
+
 def authenticate(password):
     # Assert that the password is correct
     assert password == "Iloveyou", "Invalid password!"
